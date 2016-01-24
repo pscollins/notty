@@ -20,7 +20,7 @@ use terminal::Styles;
 
 use self::CharCell::*;
 
-#[derive(Clone)]
+#[derive(Clone, PartialEq, Debug)]
 pub enum CharCell {
     Empty(Styles),
     Char(char, Styles),
