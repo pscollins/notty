@@ -21,13 +21,12 @@ use self::text_renderer::TextRenderer;
 pub struct Renderer {
     char_w: f64,
     char_h: f64,
-    scroll: u32,
 }
 
 impl Renderer {
-    pub fn new(canvas: &cairo::Context, scroll: u32) -> Renderer {
+    pub fn new(canvas: &cairo::Context) -> Renderer {
         let (char_w, char_h) = char_dimensions(canvas);
-        Renderer { char_w: char_w, char_h: char_h, scroll: scroll }
+        Renderer { char_w: char_w, char_h: char_h }
     }
 
     pub fn reset_dimensions(&self, terminal: &mut Terminal, x_pix: u32, y_pix: u32) {
@@ -43,7 +42,7 @@ impl Renderer {
         canvas.paint();
 
         let col_n = terminal.grid_width as usize;
-        let rows = terminal.into_iter().skip(self.scroll as usize * col_n).chunks_lazy(col_n);
+        let rows = terminal.into_iter().chunks_lazy(col_n);
 
         for (y_pos, row) in rows.into_iter().enumerate() {
             let y_pix = y_pix(canvas, y_pos);

@@ -81,8 +81,7 @@ fn main() {
     // Connect signal to draw on canvas.
     canvas.connect_draw(move |_, canvas| {
         let mut terminal = terminal.borrow_mut();
-        let skip = terminal.grid_height.saturating_sub(terminal.height + scroll.get() as u32);
-        let renderer = Renderer::new(&canvas, skip);
+        let renderer = Renderer::new(&canvas);
         if let (Some(x_pix), Some(y_pix)) = unsafe {(X_PIXELS.take(), Y_PIXELS.take())} {
             renderer.reset_dimensions(&mut terminal, x_pix, y_pix);
         }
