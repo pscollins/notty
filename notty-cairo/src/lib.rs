@@ -13,7 +13,7 @@ use itertools::Itertools;
 
 use notty::cfg;
 use notty::datatypes::Color;
-use notty::terminal::{CharCell, Terminal};
+use notty::terminal::{CharCell, Terminal, ResizeRule};
 
 use self::image_renderer::ImageRenderer;
 use self::text_renderer::TextRenderer;
@@ -31,7 +31,9 @@ impl Renderer {
     }
 
     pub fn reset_dimensions(&self, terminal: &mut Terminal, x_pix: u32, y_pix: u32) {
-        terminal.set_winsize(x_pix / self.char_w as u32, y_pix / self.char_h as u32)
+        terminal.set_winsize(x_pix / self.char_w as u32,
+                             y_pix / self.char_h as u32,
+                             ResizeRule::Percentage)
                 .unwrap_or_else(|e| panic!("{}", e))
     }
 
