@@ -24,7 +24,7 @@ use datatypes::{InputSettings, Key};
 
 pub use self::char_grid::{CharCell, CharGrid, Cursor, Grid, Styles, Tooltip};
 pub use self::input::Tty;
-pub use self::screen::{Screen, ScreenIter, SaveGrid};
+pub use self::screen::{Screen, ScreenIter, SaveGrid, SplitKind, ResizeRule};
 
 use self::input::Input;
 
